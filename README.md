@@ -73,7 +73,7 @@ This project helps:
 
 🌱 Future Enhancements:
 
-🔗 Integration with job portals
-📈 Advanced ML-based scoring
-📥 Resume download suggestions
-🌐 Deployment on cloud (AWS / Render)
+- 🔗 Integration with job portals
+- 📈 Advanced ML-based scoring
+- 📥 Resume download suggestions
+- 🌐 Deployment on cloud (AWS / Render)
