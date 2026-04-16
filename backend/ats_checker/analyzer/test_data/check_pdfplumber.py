@@ -1,2 +1,2 @@
 import pdfplumber
-print("✅ pdfplumber version:", pdfplumber.__version__)
+print("pdfplumber version:", pdfplumber.__version__)

@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 flex flex-col items-center justify-center text-white px-4">
+    <div className="min-h-screen bg-blue-600 flex flex-col items-center justify-center text-white px-4 py-12">
       {/* Title */}
       <h1 className="text-5xl font-extrabold mb-4 text-center">
         🤖 AI Resume Screening System
@@ -11,13 +11,13 @@ export default function Home() {
       {/* Subtitle */}
       <p className="text-lg text-center max-w-xl mb-8">
         Upload resumes, analyze skills, rank candidates, and visualize
-        performance — all powered by AI.
+        performance all powered by AI.
       </p>
 
       {/* Buttons */}
-      <div className="flex gap-4">
+      <div className="flex gap-4 mb-12">
         <Link to="/upload">
-          <button className="bg-white text-indigo-600 px-6 py-3 rounded-xl font-semibold shadow-lg hover:scale-105 transition">
+          <button className="bg-white text-blue-600 px-6 py-3 rounded-xl font-semibold shadow-lg hover:scale-105 transition">
             📄 Upload Resume
           </button>
         </Link>
@@ -30,7 +30,7 @@ export default function Home() {
       </div>
 
       {/* Features Section */}
-      <div className="mt-16 grid md:grid-cols-3 gap-6 text-center">
+      <div className="grid md:grid-cols-3 gap-6 text-center w-full max-w-5xl">
         <div className="bg-white text-black p-6 rounded-xl shadow-lg">
           <h3 className="text-xl font-bold mb-2">📄 Resume Parsing</h3>
           <p>Upload PDF resumes and extract skills automatically.</p>

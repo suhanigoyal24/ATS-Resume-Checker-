@@ -8,6 +8,7 @@ from django.conf import settings
 import os, re
 from .models import Candidate, JobDescription, MatchScore
 from .utils import extract_text_from_file, extract_skills, calculate_weighted_score, nlp
+from django.apps import apps
 
 # Simple keyword extractor (replace with your NLP logic)
 def extract_keywords(text, max_keywords=30):
@@ -200,3 +201,88 @@ def list_candidates(request):
     except Exception as e:
         print(f"[ERROR] list_candidates: {str(e)}")
         return Response({"error": "Failed to load candidates"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
+
+#=============== Machine Learning Endpoint ===============
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def ml_analyze(request):
+    import traceback  # Add this import at top of function for debugging
+    
+    resume_file = request.FILES.get('resume')
+    jd = request.data.get('job_description', '').strip()
+
+    if not resume_file or not jd:
+        return Response({"error": "Missing 'resume' file or 'job_description'"}, status=status.HTTP_400_BAD_REQUEST)
+
+    try:
+        # Save file temporarily
+        file_ext = os.path.splitext(resume_file.name)[1].lower().replace('.', '')
+        file_path = default_storage.save(f"temp_ml/{resume_file.name}", resume_file)
+        full_path = os.path.join(settings.MEDIA_ROOT, file_path)
+        print(f"[DEBUG] Saved temp file: {full_path}")
+
+        # Extract text using YOUR existing function
+        print(f"[DEBUG] Calling extract_text_from_file('{full_path}', '{file_ext}')")
+        resume_text = extract_text_from_file(full_path, file_ext)
+        print(f"[DEBUG] Extracted text length: {len(resume_text) if resume_text else 0}")
+        
+        if not resume_text or not resume_text.strip():
+            return Response({"error": "Could not extract text"}, status=status.HTTP_422_UNPROCESSABLE_ENTITY)
+
+        # Get ML engine
+        print("[DEBUG] Getting ML engine from app config...")
+        engine = apps.get_app_config('analyzer').ats_engine
+        print(f"[DEBUG] Engine loaded: {type(engine).__name__}")
+
+        # Run inference
+        print("[DEBUG] Running inference...")
+        score = engine.score(resume_text, jd)
+        matched = engine.keywords(resume_text, jd)
+        verdict = "Shortlist" if score >= 60 else "Review"
+        print(f"[DEBUG] Score: {score}, Matched: {len(matched)} keywords")
+
+        # SAVE TO DATABASE
+        from .models import MLAnalysis
+        ml_record = MLAnalysis.objects.create(
+            resume_filename=resume_file.name,
+            job_description=jd,
+            ml_score=score,
+            matched_keywords=matched,
+            verdict=verdict,
+            method="tfidf_cosine"
+        )
+        print(f"[DEBUG] Saved to DB with ID: {ml_record.id}")
+
+        return Response({
+            "match_score_percent": score,
+            "matched_keywords": matched,
+            "verdict": verdict,
+            "method": "tfidf_cosine",
+            "analysis_id": ml_record.id,
+            "message": "Analysis saved to database"
+        }, status=status.HTTP_200_OK)
+
+    except Exception as e:
+        # 🔥 PRINT FULL TRACEBACK FOR DEBUGGING
+        print(f"\n{'='*60}")
+        print(f"❌ [ML_ANALYZE CRASH] {type(e).__name__}: {str(e)}")
+        print(f"{'='*60}")
+        print(traceback.format_exc())
+        print(f"{'='*60}\n")
+        
+        return Response({
+            "error": "ML analysis failed", 
+            "error_type": type(e).__name__,
+            "details": str(e)
+        }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
+    finally:
+        # Cleanup
+        if 'full_path' in locals() and os.path.exists(full_path):
+            try:
+                os.remove(full_path)
+                default_storage.delete(file_path)
+                print("[DEBUG] Cleaned up temp file")
+            except Exception as cleanup_err:
+                print(f"[DEBUG] Cleanup warning: {cleanup_err}")

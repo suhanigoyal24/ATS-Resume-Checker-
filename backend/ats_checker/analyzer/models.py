@@ -42,3 +42,22 @@ class MatchScore(models.Model):  # ← This was missing!
     
     def __str__(self):
         return f"{self.candidate.name} → {self.score*100:.1f}%"
+    
+
+    # ================= ML Analysis Model =================
+class MLAnalysis(models.Model):
+    """Stores results from the ML-powered resume analysis"""
+    resume_filename = models.CharField(max_length=255)
+    job_description = models.TextField()
+    ml_score = models.FloatField(help_text="ML match score (0-100)")
+    matched_keywords = models.JSONField(default=list, blank=True)
+    verdict = models.CharField(max_length=50)  # "Shortlist" or "Review"
+    method = models.CharField(max_length=100, default="tfidf_cosine")
+    analyzed_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.resume_filename} → {self.ml_score}%"
+
+    class Meta:
+        ordering = ['-analyzed_at']
+        verbose_name_plural = "ML Analyses"
