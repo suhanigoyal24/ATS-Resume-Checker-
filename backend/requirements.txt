@@ -17,8 +17,4 @@ nltk>=3.8
 File Parsing
 pdfplumber>=0.10
 python-docx>=0.8
-<<<<<<< HEAD
 docx2txt>=0.8
-=======
-docx2txt>=0.8
->>>>>>> cd088de (feat: add ML engine, update analyzer & frontend, cleanup cache, and sync requirements)

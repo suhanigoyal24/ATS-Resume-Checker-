@@ -12,16 +12,6 @@ export interface MatchReport {
   recommendations: string[];
 }
 
-export interface Candidate {
-  id?: number;
-  name: string;
-  score: number;
-  skills?: string[];
-  resume_url?: string;
-  matched_keywords?: string[];
-  match_report?: MatchReport;
-  [key: string]: any;
-}
 
 export interface UploadResumeProps {
   onUpload?: (candidate: Candidate) => void;
@@ -35,4 +25,14 @@ export interface DashboardState {
   loading: boolean;
   search: string;
   minScore: number;
+}
+
+export interface Candidate {
+  id?: number;
+  name: string;
+  score: number;
+  skills?: string[];
+  resume_url?: string;
+  matched_keywords?: string[];
+  [key: string]: any;
 }

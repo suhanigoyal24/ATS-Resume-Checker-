@@ -1,4 +1,5 @@
 # analyzer/models.py
+import uuid
 from django.db import models
 
 class JobDescription(models.Model):
@@ -10,6 +11,7 @@ class JobDescription(models.Model):
     def __str__(self):
         return self.title
 
+# analyzer/models.py — Candidate class
 class Candidate(models.Model):
     name = models.CharField(max_length=100, blank=True, default="Anonymous")
     email = models.EmailField(blank=True)
@@ -17,6 +19,11 @@ class Candidate(models.Model):
     extracted_text = models.TextField(blank=True)
     extracted_skills = models.JSONField(default=list, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
+    
+    # ✅ NEW: Batch grouping for latest-view (keep only ONE of these)
+    batch_id = models.CharField(max_length=255, db_index=True, blank=True, default="default")
+    # OR if you prefer UUID:
+    # batch_id = models.UUIDField(default=uuid.uuid4, editable=False, db_index=True)
     
     def __str__(self):
         return f"{self.name} - {self.created_at.strftime('%Y-%m-%d')}"

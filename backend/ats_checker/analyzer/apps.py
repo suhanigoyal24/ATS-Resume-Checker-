@@ -1,3 +1,4 @@
+# analyzer/apps.py
 from django.apps import AppConfig
 
 class AnalyzerConfig(AppConfig):
@@ -6,10 +7,11 @@ class AnalyzerConfig(AppConfig):
 
     def ready(self):
         try:
-            from .ml_engine.inference import ATSInference
-            self.ats_engine = ATSInference()
-            print("✅ ATS ML Engine loaded successfully")
+            # FIX: Changed ATSInference -> ATSMLPredictor to match ml_predictor.py
+            from .ml_engine.ml_predictor import ATSMLPredictor
+            self.ats_engine = ATSMLPredictor()
+            print("ATS ML Engine loaded successfully")
         except FileNotFoundError as e:
-            print(f"⚠️ {e}")
+            print(f" {e}")
         except Exception as e:
-            print(f"⚠️ Failed to load ML engine: {e}")
+            print(f" Failed to load ML engine: {e}")
