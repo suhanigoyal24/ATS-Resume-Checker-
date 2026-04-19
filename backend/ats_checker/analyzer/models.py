@@ -20,7 +20,7 @@ class Candidate(models.Model):
     extracted_skills = models.JSONField(default=list, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     
-    # ✅ NEW: Batch grouping for latest-view (keep only ONE of these)
+    # NEW: Batch grouping for latest-view (keep only ONE of these)
     batch_id = models.CharField(max_length=255, db_index=True, blank=True, default="default")
     # OR if you prefer UUID:
     # batch_id = models.UUIDField(default=uuid.uuid4, editable=False, db_index=True)

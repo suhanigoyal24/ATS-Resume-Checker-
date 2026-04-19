@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-// Updated interface: single 'score' only
+// Updated interface: single 'score' only + file_url for viewing resumes
 interface HistoryCandidate {
   id: number;
   name: string;
@@ -11,6 +11,7 @@ interface HistoryCandidate {
   batch_id: string;
   analyzed_at: string;
   skills_count: number;
+  file_url?: string;          // ADDED: URL to view/download resume
 }
 
 interface Pagination {
@@ -119,13 +120,13 @@ export default function History() {
           </button>
         </form>
 
-        {/* Results Table - ✅ Updated for single score */}
+        {/* Results Table - Updated for single score */}
         <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
           <table className="w-full">
             <thead className="bg-gray-50 border-b border-gray-200">
               <tr>
                 <th className="text-left p-4 font-medium text-gray-600">Candidate</th>
-                <th className="text-left p-4 font-medium text-gray-600">Score</th> {/* Single column */}
+                <th className="text-left p-4 font-medium text-gray-600">Score</th>
                 <th className="text-left p-4 font-medium text-gray-600">Verdict</th>
                 <th className="text-left p-4 font-medium text-gray-600">Date</th>
                 <th className="text-left p-4 font-medium text-gray-600">Actions</th>
@@ -139,7 +140,7 @@ export default function History() {
                     <div className="text-xs text-gray-500">{c.skills_count} skills</div>
                   </td>
                   
-                  {/* ✅ Single Score Badge */}
+                  {/* Single Score Badge */}
                   <td className="p-4">
                     <span className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-bold ${
                       c.score >= 70 ? 'bg-green-100 text-green-800' :
@@ -162,10 +163,20 @@ export default function History() {
                     {new Date(c.analyzed_at).toLocaleDateString()}
                   </td>
                   
+                  {/* FIXED: View Details button now opens resume */}
                   <td className="p-4">
-                    <button className="text-blue-600 hover:text-blue-800 text-sm font-medium">
-                      View Details
-                    </button>
+                    {c.file_url ? (
+                      <a
+                        href={c.file_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-600 hover:text-blue-800 text-sm font-medium"
+                      >
+                        View Details
+                      </a>
+                    ) : (
+                      <span className="text-gray-400 text-sm">No file</span>
+                    )}
                   </td>
                 </tr>
               ))}
