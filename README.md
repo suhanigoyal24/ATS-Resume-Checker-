@@ -1,80 +1,75 @@
-🤖 AI-Based Resume Checker & Job Matching System (ATS Resume Checker)
+🤖 AI-Based Resume Screening & Job Description Matching System
 
-An intelligent web application that analyzes resumes using AI/NLP techniques and evaluates them based on ATS (Applicant Tracking System) standards. The system helps users improve their resumes and match them with relevant job roles.
+Major Project | Department of Computer Science & Applications (CSA)
+ITM University | Submitted to Dr. Keerti Shrivastava, Assistant Professor
 
 ---
 
- 🚀 Features
+📌 Project Overview
+An intelligent web application that analyzes resumes using AI/NLP techniques and evaluates them against ATS (Applicant Tracking System) standards. The system helps students and job seekers optimize their resumes and match them with relevant job roles.
 
-- 📄 Upload and analyze resumes  
-- 🧠 AI/NLP-based resume evaluation  
-- 📊 ATS score generation  
-- 🔍 Keyword extraction and matching  
-- 💼 Job role recommendation (based on resume content)  
-- ⚡ Clean and responsive UI  
+---
+
+🚀 Features
+
+📄 Upload and analyze resumes (PDF/DOCX)
+🧠 AI/NLP-based resume evaluation
+📊 ATS score generation
+🔍 Keyword extraction and matching
+💼 Job role recommendation based on resume content
+⚡ Clean and responsive UI
 
 ---
 
 🛠️ Tech Stack
-
-Frontend
-- React (Vite)
-- Tailwind CSS
-- JavaScript / TypeScript
-
-Backend
-- Python
-- Django
-- Django REST Framework
-
-Other Tools
-- NLP libraries (spaCy / NLTK)
-- REST APIs
-- SQLite / Database integration
-
----
+LayerTechnologiesFrontendReact (Vite), Tailwind CSS, JavaScript / TypeScriptBackendPython, Django, Django REST FrameworkNLPspaCy / NLTKDatabaseSQLiteAPIREST APIs
 
 📂 Project Structure
-ATS-Resume-Checker/
+MajorProject_AIResumeScreening_YourName/
 │
-├── frontend/ # React frontend
-├── backend/ # Django backend
+├── frontend/        # React (Vite) frontend
+├── backend/         # Django backend
 └── README.md
 
 ---
 
-⚙️ How to Run the Project
-
-Frontend:
-cd frontend
+⚙️ How to Run
+Frontend
+bashcd frontend
 npm install
 npm run dev
-
 Runs on: http://localhost:5173
 
----
-
 Backend
-cd backend
+bashcd backend
+pip install -r requirements.txt
+python manage.py migrate
 python manage.py runserver
-
 Runs on: http://127.0.0.1:8000
 
 ---
 
 🎯 Use Case
+This system is designed to help:
 
-This project helps:
-
-* Students improve their resumes
-* Job seekers optimize resumes for ATS systems
-* Recruiters quickly evaluate candidate resumes
+Students improve and optimize their resumes
+Job seekers pass ATS filters with better keyword alignment
+Recruiters quickly evaluate and shortlist candidate resumes
 
 ---
 
-🌱 Future Enhancements:
+🌱 Future Enhancements
 
-- 🔗 Integration with job portals
-- 📈 Advanced ML-based scoring
-- 📥 Resume download suggestions
-- 🌐 Deployment on cloud (AWS / Render)
+🔗 Integration with job portals (LinkedIn, Naukri)
+📈 Advanced ML-based scoring models
+📥 Resume improvement suggestions & download
+🌐 Cloud deployment (AWS / Render)
+
+---
+
+📚 Academic Submission
+Project Type : Major Project
+Submitted To : Dr. Keerti Shrivastava, Assistant Professor 
+Department : Computer Science & Applications (CSA) 
+University : ITM University
+Submitted By : Suhani Goyal
