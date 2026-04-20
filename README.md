@@ -34,14 +34,14 @@ MajorProject_AIResumeScreening_YourName/
 ---
 
 ⚙️ How to Run
-Frontend
-bashcd frontend
+Frontend:
+cd frontend
 npm install
 npm run dev
 Runs on: http://localhost:5173
 
-Backend
-bashcd backend
+Backend:
+cd backend
 pip install -r requirements.txt
 python manage.py migrate
 python manage.py runserver
