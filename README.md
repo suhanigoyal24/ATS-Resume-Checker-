@@ -6,23 +6,71 @@ ITM University | Submitted to Dr. Keerti Shrivastava, Assistant Professor
 ---
 
 📌 Project Overview
-An intelligent web application that analyzes resumes using AI/NLP techniques and evaluates them against ATS (Applicant Tracking System) standards. The system helps students and job seekers optimize their resumes and match them with relevant job roles.
+
+Recruitment teams receive hundreds of resumes per job posting making manual screening
+slow, inconsistent and prone to bias. This system uses AI/ML to automate resume parsing,
+skill extraction, and candidate ranking.
+
+HR teams can upload up to 20 resumes at once, match them against a job description,
+and receive ranked results , cutting screening time by ~70% while improving accuracy
+and consistency.
+
+---
+
+❗ Problem Statement
+
+HR teams struggle to efficiently process large volumes of resumes in varied formats
+(PDF, DOCX, TXT), leading to:
+- Delayed hiring pipelines
+- Inconsistent manual evaluation
+- Potential loss of qualified candidates
+
+---
+
+✅ Solution
+
+An automated Django-based system that:
+- Parses resumes across multiple formats (PDF, DOCX, TXT)
+- Extracts skills, experience, and education accurately using NLP
+- Ranks candidates using a **hybrid SBERT + TF-IDF scoring model**
+- Stores data securely in SQL with a full audit trail
+- Delivers explainable, transparent results to HR teams
+
+---
+
+🎯 Objectives
+
+- Accept resume files in multiple formats (PDF, DOCX, TXT)
+- Automatically extract text, skills, experience, and education
+- Rank candidates based on job description matching using NLP & ML
+- Store processed data securely for future reference and audit
+- Provide a clean HR interface to upload job descriptions and view ranked results
 
 ---
 
 🚀 Features
 
-📄 Upload and analyze resumes (PDF/DOCX)
-🧠 AI/NLP-based resume evaluation
-📊 ATS score generation
-🔍 Keyword extraction and matching
-💼 Job role recommendation based on resume content
-⚡ Clean and responsive UI
+- 📂 Bulk resume upload — up to **20 resumes at once**
+- 📄 Multi-format support — PDF, DOCX, TXT
+- 🧠 AI/NLP-based resume parsing & skill extraction
+- 📊 Hybrid **SBERT + TF-IDF** candidate ranking
+- 🔍 Job description matching & keyword analysis
+- 🗃️ Secure SQL storage with audit trail
+- ⚡ Clean, responsive HR dashboard
 
 ---
 
 🛠️ Tech Stack
-LayerTechnologiesFrontendReact (Vite), Tailwind CSS, JavaScript / TypeScriptBackendPython, Django, Django REST FrameworkNLPspaCy / NLTKDatabaseSQLiteAPIREST APIs
+
+| Layer      | Technologies                              |
+|------------|-------------------------------------------|
+| Frontend   | React (Vite), Tailwind CSS, TypeScript    |
+| Backend    | Python, Django, Django REST Framework     |
+| AI / NLP   | SBERT, TF-IDF, spaCy / NLTK               |
+| Database   | SQLite (with audit trail)                 |
+| API        | REST APIs                                 |
+
+---
 
 📂 Project Structure
 MajorProject_AIResumeScreening_YourName/
@@ -49,21 +97,22 @@ Runs on: http://127.0.0.1:8000
 
 ---
 
-🎯 Use Case
-This system is designed to help:
+👥 Target Users
 
-Students improve and optimize their resumes
-Job seekers pass ATS filters with better keyword alignment
-Recruiters quickly evaluate and shortlist candidate resumes
+This system is built for **HR professionals and recruitment teams** who need to:
+- Screen large volumes of applicants quickly
+- Fairly and consistently rank candidates
+- Match resumes to specific job descriptions at scale
 
 ---
 
 🌱 Future Enhancements
 
-🔗 Integration with job portals (LinkedIn, Naukri)
-📈 Advanced ML-based scoring models
-📥 Resume improvement suggestions & download
-🌐 Cloud deployment (AWS / Render)
+-🔗 Integration with job portals (LinkedIn, Naukri)
+-📈 Advanced ML-based scoring models
+-📥 Resume improvement suggestions & download
+-🌐 Cloud deployment (AWS / Render)
+-📧 Automated candidate shortlisting emails
 
 ---
 
