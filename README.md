@@ -73,7 +73,7 @@ An automated Django-based system that:
 ---
 
 📂 Project Structure
-MajorProject_AIResumeScreening_YourName/
+MajorProject_AIResumeScreening_SuhaniGoyal/
 │
 ├── frontend/        # React (Vite) frontend
 ├── backend/         # Django backend
