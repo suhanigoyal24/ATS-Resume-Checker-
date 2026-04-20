@@ -25,6 +25,7 @@ Frontend
 Backend
 - Python
 - Django
+- Django REST Framework
 
 Other Tools
 - NLP libraries (spaCy / NLTK)
